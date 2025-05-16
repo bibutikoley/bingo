@@ -13,16 +13,27 @@ class AppViewModel : ViewModel() {
 
     fun processEvents(userEvents: UserEvents) {
         when (userEvents) {
-            UserEvents.Pause -> _uiState.update {
-                it.copy(currentButtonState = ButtonState.Play)
+            UserEvents.Pause -> {
+                _uiState.update {
+                    it.copy(currentButtonState = ButtonState.Play)
+                }
             }
 
-            UserEvents.Play -> _uiState.update {
-                it.copy(currentButtonState = ButtonState.Pause)
+            UserEvents.Play -> {
+                _uiState.update {
+                    it.copy(currentButtonState = ButtonState.Pause)
+                }
             }
 
-            UserEvents.Reset -> _uiState.update {
-                it.copy(currentButtonState = ButtonState.Play)
+            UserEvents.Reset -> {
+                _uiState.update {
+                    it.copy(
+                        currentButtonState = BingoViewState.initialState.currentButtonState,
+                        currentGeneratedItem = BingoViewState.initialState.currentGeneratedItem,
+                        bingoNumbers = BingoViewState.initialState.bingoNumbers,
+                        drawnNumbers = BingoViewState.initialState.drawnNumbers
+                    )
+                }
             }
         }
     }

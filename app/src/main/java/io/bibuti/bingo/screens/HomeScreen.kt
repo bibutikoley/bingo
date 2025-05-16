@@ -43,7 +43,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                CurrentGeneratedNumber(number = null)
+                CurrentGeneratedNumber(number = uiState.currentGeneratedItem?.number)
                 InteractionButtons(
                     currentButtonState = uiState.currentButtonState,
                     onPlayTapped = {

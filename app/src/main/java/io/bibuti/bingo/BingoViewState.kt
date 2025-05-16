@@ -2,10 +2,121 @@ package io.bibuti.bingo
 
 data class BingoViewState(
     val currentButtonState: ButtonState,
+    val currentGeneratedItem: BingoItem?,
+    val bingoNumbers: List<BingoItem>,
+    val drawnNumbers: List<BingoItem>
 ) {
     companion object {
         val initialState = BingoViewState(
-            currentButtonState = ButtonState.Play
+            currentButtonState = ButtonState.Play,
+            currentGeneratedItem = null,
+            bingoNumbers = lingoMap.map {
+                BingoItem(
+                    number = it.key,
+                    lingo = it.value,
+                    isChecked = false
+                )
+            },
+            drawnNumbers = emptyList()
         )
     }
 }
+
+data class BingoItem(
+    val number: Int,
+    val lingo: String,
+    val isChecked: Boolean
+)
+
+val lingoMap = mapOf(
+    1 to "Kelly's Eye",
+    2 to "One little duck",
+    3 to "Cup of tea",
+    4 to "Knock at the door",
+    5 to "Man alive",
+    6 to "Half a dozen",
+    7 to "Lucky seven",
+    8 to "Garden gate",
+    9 to "Doctor's orders",
+    10 to "Boris's Den",
+    11 to "Legs eleven",
+    12 to "One dozen",
+    13 to "Unlucky for some",
+    14 to "Valentine's Day",
+    15 to "Young and keen",
+    16 to "Sweet sixteen",
+    17 to "Dancing Queen",
+    18 to "Coming of age",
+    19 to "Goodbye teens",
+    20 to "One score",
+    21 to "Key of the door",
+    22 to "Two little ducks",
+    23 to "Thee and me",
+    24 to "Two dozen",
+    25 to "Duck and dive",
+    26 to "Pick and mix",
+    27 to "Gateway to heaven",
+    28 to "Over weight",
+    29 to "Rise and shine",
+    30 to "Dirty Gertie",
+    31 to "Get up and run",
+    32 to "Buckle my shoe",
+    33 to "All the threes",
+    34 to "Ask for more",
+    35 to "Jump and jive",
+    36 to "Three dozen",
+    37 to "More than eleven",
+    38 to "Christmas cake",
+    39 to "Steps",
+    40 to "Naughty forty",
+    41 to "Time for fun",
+    42 to "Winnie the Pooh",
+    43 to "Down on your knees",
+    44 to "Droopy drawers",
+    45 to "Halfway there",
+    46 to "Up to tricks",
+    47 to "Four and seven",
+    48 to "Four dozen",
+    49 to "PC",
+    50 to "Half a century",
+    51 to "Tweak of the thumb",
+    52 to "Danny La Rue",
+    53 to "Stuck in the tree",
+    54 to "Clean the floor",
+    55 to "All the fives",
+    56 to "Was she worth it?",
+    57 to "Heinz varieties",
+    58 to "Make them wait",
+    59 to "Brighton line",
+    60 to "Five dozen",
+    61 to "Baker's bun",
+    62 to "Turn on the screw",
+    63 to "Tickle me 63",
+    64 to "Red raw",
+    65 to "Old age pension",
+    66 to "Clickety click",
+    67 to "Made in heaven",
+    68 to "Saving grace",
+    69 to "Anyway up",
+    70 to "Three score and ten",
+    71 to "Bang on the drum",
+    72 to "Six dozen",
+    73 to "Queen bee",
+    74 to "Candy store",
+    75 to "Strive and strive",
+    76 to "Trombones",
+    77 to "Sunset strip",
+    78 to "Heaven's gate",
+    79 to "One more time",
+    80 to "Gandhi's breakfast",
+    81 to "Stop and run",
+    82 to "Straight on through",
+    83 to "Time for tea",
+    84 to "Seven dozen",
+    85 to "Staying alive",
+    86 to "Between the sticks",
+    87 to "Torquay in Devon",
+    88 to "Two fat ladies",
+    89 to "Nearly there",
+    90 to "Top of the shop"
+)
