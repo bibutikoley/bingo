@@ -234,7 +234,7 @@ fun RecentlyGeneratedNumbers(drawnNumbers: List<BingoItem>) {
                 ) {
                     Text(
                         text = bingoItem.number.toString(),
-                        fontSize = 18.sp,
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.Black,
                         color = Color.Black
                     )
