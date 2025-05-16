@@ -83,10 +83,10 @@ fun NumberGridCard(
                         Box(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier
-                                .padding(4.dp)
+                                .padding(2.dp)
                                 .weight(1f)
                                 .aspectRatio(1f)
-                                .padding(4.dp)
+                                .padding(2.dp)
                                 .background(
                                     shape = CircleShape,
                                     color = Color.White.copy(
