@@ -4,18 +4,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import io.bibuti.bingo.R
 import io.bibuti.bingo.components.GlassmorphicCard
+import io.bibuti.bingo.components.NumberGridCard
 
-private const val TAG = "HomeScreen"
+const val TAG = "HomeScreen"
 
 @Composable
 fun HomeScreen() {
@@ -28,10 +30,12 @@ fun HomeScreen() {
             Spacer(modifier = Modifier.weight(1f))
             GlassmorphicCard(
                 modifier = Modifier
-                    .aspectRatio(1f)
+                    .size(LocalWindowInfo.current.containerSize.width.div(3).dp)
                     .padding(16.dp)
             ) {
-
+                NumberGridCard(
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }
