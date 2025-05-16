@@ -30,7 +30,9 @@ fun HomeScreen() {
                 modifier = Modifier
                     .aspectRatio(1f)
                     .padding(16.dp)
-            )
+            ) {
+
+            }
         }
     }
 }

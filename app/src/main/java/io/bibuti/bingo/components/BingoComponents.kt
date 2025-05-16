@@ -1,5 +1,6 @@
 package io.bibuti.bingo.components
 
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -8,7 +9,7 @@ import androidx.tv.material3.Card
 import androidx.tv.material3.CardDefaults
 
 @Composable
-fun GlassmorphicCard(modifier: Modifier = Modifier) {
+fun GlassmorphicCard(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
     Card(
         border = CardDefaults.border(
             focusedBorder = Border.None,
@@ -21,7 +22,7 @@ fun GlassmorphicCard(modifier: Modifier = Modifier) {
         onClick = {},
         modifier = modifier
     ) {
-
+        content()
     }
 }
 
