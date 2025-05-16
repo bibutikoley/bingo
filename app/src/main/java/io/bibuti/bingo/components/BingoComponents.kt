@@ -39,6 +39,7 @@ import androidx.tv.material3.CardDefaults
 import androidx.tv.material3.Icon
 import androidx.tv.material3.IconButton
 import androidx.tv.material3.Text
+import io.bibuti.bingo.BingoItem
 import io.bibuti.bingo.ButtonState
 
 @Composable
@@ -61,8 +62,10 @@ fun GlassmorphicCard(modifier: Modifier = Modifier, content: @Composable ColumnS
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NumberGridCard(modifier: Modifier = Modifier) {
-    val numbers = (1..90).toList()
+fun NumberGridCard(
+    modifier: Modifier = Modifier,
+    numbers: List<BingoItem>
+) {
     val columns = 10
     val rows = 9
 
@@ -86,12 +89,14 @@ fun NumberGridCard(modifier: Modifier = Modifier) {
                                 .background(shape = CircleShape, color = Color.White)
                                 .border(width = 2.dp, shape = CircleShape, color = Color.Black)
                         ) {
-                            Text(
-                                text = numbers[index].toString(),
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Black,
-                                color = Color.Black
-                            )
+                            if (numbers[index].isChecked) {
+                                Text(
+                                    text = numbers[index].number.toString(),
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Black,
+                                    color = Color.Black
+                                )
+                            }
                         }
                     }
                 }
@@ -179,7 +184,7 @@ fun InteractionButtons(
 
 
 @Composable
-fun RecentlyGeneratedNumbers() {
+fun RecentlyGeneratedNumbers(drawnNumbers: List<BingoItem>) {
     GlassmorphicCard(
         modifier = Modifier
             .wrapContentWidth()

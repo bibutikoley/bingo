@@ -59,7 +59,7 @@ fun HomeScreen(
                         onUserEvents.invoke(UserEvents.Reset)
                     }
                 )
-                RecentlyGeneratedNumbers()
+                RecentlyGeneratedNumbers(drawnNumbers = uiState.drawnNumbers)
             }
             GlassmorphicCard(
                 modifier = Modifier
@@ -67,7 +67,8 @@ fun HomeScreen(
                     .padding(16.dp)
             ) {
                 NumberGridCard(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    numbers = uiState.bingoNumbers
                 )
             }
         }
