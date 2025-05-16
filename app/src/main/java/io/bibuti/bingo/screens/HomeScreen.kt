@@ -37,8 +37,9 @@ fun HomeScreen() {
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                CurrentGeneratedNumber(number = 90)
+                CurrentGeneratedNumber(number = null)
                 InteractionButtons(
+                    isGameOn = true,
                     onPlayTapped = {
                         Log.d(TAG, "HomeScreen: OnPlayTapped")
                     },

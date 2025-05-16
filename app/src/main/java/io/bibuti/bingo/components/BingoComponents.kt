@@ -94,7 +94,7 @@ fun NumberGridCard(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun CurrentGeneratedNumber(modifier: Modifier = Modifier, number: Int) {
+fun CurrentGeneratedNumber(modifier: Modifier = Modifier, number: Int?) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
@@ -104,7 +104,7 @@ fun CurrentGeneratedNumber(modifier: Modifier = Modifier, number: Int) {
             .size(250.dp)
     ) {
         Text(
-            text = "$number",
+            text = number?.toString() ?: "-",
             fontSize = 80.sp,
             fontWeight = FontWeight.Black,
             color = Color.Black
@@ -114,29 +114,34 @@ fun CurrentGeneratedNumber(modifier: Modifier = Modifier, number: Int) {
 
 @Composable
 fun InteractionButtons(
+    isGameOn: Boolean,
     onPlayTapped: (() -> Unit),
     onPauseTapped: (() -> Unit),
     onResetConfirmed: (() -> Unit)
 ) {
     var resetClickCount by remember { mutableIntStateOf(0) }
     Row {
-        IconButton(
-            onClick = {
-                resetClickCount = 0
-                onPlayTapped()
-            },
-            modifier = Modifier.padding(end = 8.dp)
-        ) {
-            Icon(Icons.Default.PlayCircle, contentDescription = null)
+        if (!isGameOn) {
+            IconButton(
+                onClick = {
+                    resetClickCount = 0
+                    onPlayTapped()
+                },
+                modifier = Modifier.padding(end = 8.dp)
+            ) {
+                Icon(Icons.Default.PlayCircle, contentDescription = null)
+            }
         }
-        IconButton(
-            onClick = {
-                resetClickCount = 0
-                onPauseTapped()
-            },
-            modifier = Modifier.padding(horizontal = 4.dp)
-        ) {
-            Icon(Icons.Default.PauseCircle, contentDescription = null)
+        if (isGameOn) {
+            IconButton(
+                onClick = {
+                    resetClickCount = 0
+                    onPauseTapped()
+                },
+                modifier = Modifier.padding(horizontal = 4.dp)
+            ) {
+                Icon(Icons.Default.PauseCircle, contentDescription = null)
+            }
         }
         IconButton(
             onClick = {
