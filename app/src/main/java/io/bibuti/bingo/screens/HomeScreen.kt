@@ -23,6 +23,7 @@ import io.bibuti.bingo.components.CurrentGeneratedNumber
 import io.bibuti.bingo.components.GlassmorphicCard
 import io.bibuti.bingo.components.InteractionButtons
 import io.bibuti.bingo.components.NumberGridCard
+import io.bibuti.bingo.components.RecentlyGeneratedNumbers
 
 const val TAG = "HomeScreen"
 
@@ -58,6 +59,7 @@ fun HomeScreen(
                         onUserEvents.invoke(UserEvents.Reset)
                     }
                 )
+                RecentlyGeneratedNumbers()
             }
             GlassmorphicCard(
                 modifier = Modifier

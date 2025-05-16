@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PauseCircle
@@ -172,6 +173,77 @@ fun InteractionButtons(
             modifier = Modifier.padding(start = 8.dp)
         ) {
             Icon(Icons.Default.ReplayCircleFilled, contentDescription = null)
+        }
+    }
+}
+
+
+@Composable
+fun RecentlyGeneratedNumbers() {
+    GlassmorphicCard(
+        modifier = Modifier
+            .wrapContentWidth()
+            .padding(vertical = 16.dp)
+    ) {
+        Text(
+            "Last 3 Numbers: ",
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .padding(top = 4.dp),
+            color = Color.Black,
+            fontWeight = FontWeight.Black
+        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .padding(4.dp)
+                    .padding(4.dp)
+                    .size(56.dp)
+                    .background(shape = CircleShape, color = Color.White)
+                    .border(width = 2.dp, shape = CircleShape, color = Color.Black)
+            ) {
+                Text(
+                    text = "90".toString(),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Black,
+                    color = Color.Black
+                )
+            }
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .padding(4.dp)
+                    .padding(4.dp)
+                    .size(52.dp)
+                    .background(shape = CircleShape, color = Color.White)
+                    .border(width = 2.dp, shape = CircleShape, color = Color.Black)
+            ) {
+                Text(
+                    text = "90".toString(),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Black,
+                    color = Color.Black
+                )
+            }
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .padding(4.dp)
+                    .padding(4.dp)
+                    .size(48.dp)
+                    .background(shape = CircleShape, color = Color.White)
+                    .border(width = 2.dp, shape = CircleShape, color = Color.Black)
+            ) {
+                Text(
+                    text = "90".toString(),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Black,
+                    color = Color.Black
+                )
+            }
         }
     }
 }
