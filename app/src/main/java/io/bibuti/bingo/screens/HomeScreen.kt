@@ -16,7 +16,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import io.bibuti.bingo.BingoViewState
 import io.bibuti.bingo.R
+import io.bibuti.bingo.UserEvents
 import io.bibuti.bingo.components.CurrentGeneratedNumber
 import io.bibuti.bingo.components.GlassmorphicCard
 import io.bibuti.bingo.components.InteractionButtons
@@ -25,7 +27,10 @@ import io.bibuti.bingo.components.NumberGridCard
 const val TAG = "HomeScreen"
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    uiState: BingoViewState,
+    onUserEvents: (UserEvents) -> Unit,
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         AppBackground()
         Row(
@@ -39,15 +44,18 @@ fun HomeScreen() {
             ) {
                 CurrentGeneratedNumber(number = null)
                 InteractionButtons(
-                    isGameOn = false,
+                    currentButtonState = uiState.currentButtonState,
                     onPlayTapped = {
                         Log.d(TAG, "HomeScreen: OnPlayTapped")
+                        onUserEvents.invoke(UserEvents.Play)
                     },
                     onPauseTapped = {
                         Log.d(TAG, "HomeScreen: OnPauseTapped")
+                        onUserEvents.invoke(UserEvents.Pause)
                     },
                     onResetConfirmed = {
                         Log.d(TAG, "HomeScreen: OnResetTapped")
+                        onUserEvents.invoke(UserEvents.Reset)
                     }
                 )
             }

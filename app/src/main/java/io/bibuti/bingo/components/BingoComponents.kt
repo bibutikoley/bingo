@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PauseCircle
@@ -36,6 +38,7 @@ import androidx.tv.material3.CardDefaults
 import androidx.tv.material3.Icon
 import androidx.tv.material3.IconButton
 import androidx.tv.material3.Text
+import io.bibuti.bingo.ButtonState
 
 @Composable
 fun GlassmorphicCard(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
@@ -117,7 +120,7 @@ fun CurrentGeneratedNumber(modifier: Modifier = Modifier, number: Int?) {
 
 @Composable
 fun InteractionButtons(
-    isGameOn: Boolean,
+    currentButtonState: ButtonState,
     onPlayTapped: (() -> Unit),
     onPauseTapped: (() -> Unit),
     onResetConfirmed: (() -> Unit)
@@ -126,40 +129,38 @@ fun InteractionButtons(
     val playFocusRequester = remember { FocusRequester() }
     val pauseFocusRequester = remember { FocusRequester() }
 
-    LaunchedEffect(isGameOn) {
-        if (isGameOn) {
-            pauseFocusRequester.requestFocus()
-        } else {
-            playFocusRequester.requestFocus()
+    LaunchedEffect(currentButtonState) {
+        when (currentButtonState) {
+            ButtonState.Pause -> pauseFocusRequester.requestFocus()
+            ButtonState.Play -> playFocusRequester.requestFocus()
         }
     }
     Row {
-        if (!isGameOn) {
+        if (currentButtonState == ButtonState.Play) {
             IconButton(
                 onClick = {
                     resetClickCount = 0
                     onPlayTapped()
                 },
                 modifier = Modifier
-                    .padding(end = 8.dp)
                     .focusRequester(playFocusRequester)
             ) {
                 Icon(Icons.Default.PlayCircle, contentDescription = null)
             }
         }
-        if (isGameOn) {
+        if (currentButtonState == ButtonState.Pause) {
             IconButton(
                 onClick = {
                     resetClickCount = 0
                     onPauseTapped()
                 },
                 modifier = Modifier
-                    .padding(horizontal = 4.dp)
                     .focusRequester(pauseFocusRequester)
             ) {
                 Icon(Icons.Default.PauseCircle, contentDescription = null)
             }
         }
+        Spacer(Modifier.width(4.dp))
         IconButton(
             onClick = {
                 resetClickCount++
