@@ -1,6 +1,7 @@
 package io.bibuti.bingo.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import io.bibuti.bingo.R
 import io.bibuti.bingo.components.CurrentGeneratedNumber
 import io.bibuti.bingo.components.GlassmorphicCard
+import io.bibuti.bingo.components.InteractionButtons
 import io.bibuti.bingo.components.NumberGridCard
 
 const val TAG = "HomeScreen"
@@ -31,9 +33,11 @@ fun HomeScreen() {
         ) {
             Column(
                 modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CurrentGeneratedNumber(number = 90)
+                InteractionButtons()
             }
             GlassmorphicCard(
                 modifier = Modifier

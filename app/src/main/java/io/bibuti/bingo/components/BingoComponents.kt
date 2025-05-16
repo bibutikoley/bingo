@@ -12,6 +12,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PauseCircle
+import androidx.compose.material.icons.filled.PlayCircle
+import androidx.compose.material.icons.filled.ReplayCircleFilled
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.tv.material3.Border
 import androidx.tv.material3.Card
 import androidx.tv.material3.CardDefaults
+import androidx.tv.material3.Icon
+import androidx.tv.material3.IconButton
 import androidx.tv.material3.Text
 
 @Composable
@@ -97,5 +103,20 @@ fun CurrentGeneratedNumber(modifier: Modifier = Modifier, number: Int) {
             fontWeight = FontWeight.Black,
             color = Color.Black
         )
+    }
+}
+
+@Composable
+fun InteractionButtons() {
+    Row {
+        IconButton(onClick = {}, modifier = Modifier.padding(end = 8.dp)) {
+            Icon(Icons.Default.PlayCircle, contentDescription = null)
+        }
+        IconButton(onClick = {}, modifier = Modifier.padding(horizontal = 4.dp)) {
+            Icon(Icons.Default.PauseCircle, contentDescription = null)
+        }
+        IconButton(onClick = {}, modifier = Modifier.padding(start = 8.dp)) {
+            Icon(Icons.Default.ReplayCircleFilled, contentDescription = null)
+        }
     }
 }
