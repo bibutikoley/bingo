@@ -1,6 +1,8 @@
 package io.bibuti.bingo
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.speech.tts.TextToSpeech
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -8,18 +10,28 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Locale
 import kotlin.random.Random
-import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
-val GENERATE_AFTER = 500.milliseconds
+val GENERATE_AFTER = 4.seconds
 
-class AppViewModel : ViewModel() {
+class AppViewModel(application: Application) : AndroidViewModel(application = application) {
 
     private val _uiState: MutableStateFlow<BingoViewState> =
         MutableStateFlow(value = BingoViewState.initialState)
     val uiState = _uiState.asStateFlow()
 
     private var gameJob: Job? = null
+    private var tts: TextToSpeech
+
+    init {
+        tts = TextToSpeech(application) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                tts.language = Locale.UK
+            }
+        }
+    }
 
     fun processEvents(userEvents: UserEvents) {
         when (userEvents) {
@@ -70,6 +82,14 @@ class AppViewModel : ViewModel() {
                         drawnNumbers = currentState.drawnNumbers + selectedBingoItem
                     )
                 }
+                _uiState.value.currentGeneratedItem?.let { item ->
+                    tts.speak(
+                        "${item.number}, ${item.lingo}",
+                        TextToSpeech.QUEUE_FLUSH,
+                        null,
+                        "bingo_number"
+                    )
+                }
                 delay(GENERATE_AFTER)
             }
         }
@@ -87,5 +107,17 @@ class AppViewModel : ViewModel() {
         _uiState.update {
             BingoViewState.initialState
         }
+        tts.speak(
+            "Game Reset",
+            TextToSpeech.QUEUE_FLUSH,
+            null,
+            "bingo_number"
+        )
+    }
+
+    override fun onCleared() {
+        tts.stop()
+        tts.shutdown()
+        super.onCleared()
     }
 }
