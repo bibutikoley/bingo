@@ -17,6 +17,10 @@ import androidx.compose.material.icons.filled.PauseCircle
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.ReplayCircleFilled
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -55,9 +59,11 @@ fun NumberGridCard(modifier: Modifier = Modifier) {
     val columns = 10
     val rows = 9
 
-    Column(modifier = modifier
-        .fillMaxSize()
-        .padding(8.dp)) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
         for (row in 0 until rows) {
             Row(modifier = Modifier.weight(1f)) {
                 for (col in 0 until columns) {
@@ -107,15 +113,41 @@ fun CurrentGeneratedNumber(modifier: Modifier = Modifier, number: Int) {
 }
 
 @Composable
-fun InteractionButtons() {
+fun InteractionButtons(
+    onPlayTapped: (() -> Unit),
+    onPauseTapped: (() -> Unit),
+    onResetConfirmed: (() -> Unit)
+) {
+    var resetClickCount by remember { mutableIntStateOf(0) }
     Row {
-        IconButton(onClick = {}, modifier = Modifier.padding(end = 8.dp)) {
+        IconButton(
+            onClick = {
+                resetClickCount = 0
+                onPlayTapped()
+            },
+            modifier = Modifier.padding(end = 8.dp)
+        ) {
             Icon(Icons.Default.PlayCircle, contentDescription = null)
         }
-        IconButton(onClick = {}, modifier = Modifier.padding(horizontal = 4.dp)) {
+        IconButton(
+            onClick = {
+                resetClickCount = 0
+                onPauseTapped()
+            },
+            modifier = Modifier.padding(horizontal = 4.dp)
+        ) {
             Icon(Icons.Default.PauseCircle, contentDescription = null)
         }
-        IconButton(onClick = {}, modifier = Modifier.padding(start = 8.dp)) {
+        IconButton(
+            onClick = {
+                resetClickCount++
+                if (resetClickCount == 3) {
+                    onResetConfirmed()
+                    resetClickCount = 0
+                }
+            },
+            modifier = Modifier.padding(start = 8.dp)
+        ) {
             Icon(Icons.Default.ReplayCircleFilled, contentDescription = null)
         }
     }

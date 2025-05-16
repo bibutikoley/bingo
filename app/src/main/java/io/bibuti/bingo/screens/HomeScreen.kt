@@ -1,5 +1,6 @@
 package io.bibuti.bingo.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,7 +38,17 @@ fun HomeScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CurrentGeneratedNumber(number = 90)
-                InteractionButtons()
+                InteractionButtons(
+                    onPlayTapped = {
+                        Log.d(TAG, "HomeScreen: OnPlayTapped")
+                    },
+                    onPauseTapped = {
+                        Log.d(TAG, "HomeScreen: OnPauseTapped")
+                    },
+                    onResetConfirmed = {
+                        Log.d(TAG, "HomeScreen: OnResetTapped")
+                    }
+                )
             }
             GlassmorphicCard(
                 modifier = Modifier
