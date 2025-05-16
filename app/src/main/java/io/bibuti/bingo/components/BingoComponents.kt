@@ -182,16 +182,21 @@ fun InteractionButtons(
     }
 }
 
-
 @Composable
 fun RecentlyGeneratedNumbers(drawnNumbers: List<BingoItem>) {
+    val recentThree = drawnNumbers.takeLast(3).reversed()
+
+    if (recentThree.isEmpty()) {
+        return
+    }
+
     GlassmorphicCard(
         modifier = Modifier
             .wrapContentWidth()
             .padding(vertical = 16.dp)
     ) {
         Text(
-            "Last 3 Numbers: ",
+            "Last ${recentThree.size} Number${if (recentThree.size > 1) "s" else ""}: ",
             modifier = Modifier
                 .padding(horizontal = 8.dp)
                 .padding(top = 4.dp),
@@ -201,53 +206,28 @@ fun RecentlyGeneratedNumbers(drawnNumbers: List<BingoItem>) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .padding(4.dp)
-                    .padding(4.dp)
-                    .size(56.dp)
-                    .background(shape = CircleShape, color = Color.White)
-                    .border(width = 2.dp, shape = CircleShape, color = Color.Black)
-            ) {
-                Text(
-                    text = "90".toString(),
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Black,
-                    color = Color.Black
-                )
-            }
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .padding(4.dp)
-                    .padding(4.dp)
-                    .size(52.dp)
-                    .background(shape = CircleShape, color = Color.White)
-                    .border(width = 2.dp, shape = CircleShape, color = Color.Black)
-            ) {
-                Text(
-                    text = "90".toString(),
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Black,
-                    color = Color.Black
-                )
-            }
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .padding(4.dp)
-                    .padding(4.dp)
-                    .size(48.dp)
-                    .background(shape = CircleShape, color = Color.White)
-                    .border(width = 2.dp, shape = CircleShape, color = Color.Black)
-            ) {
-                Text(
-                    text = "90".toString(),
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Black,
-                    color = Color.Black
-                )
+            recentThree.forEachIndexed { index, bingoItem ->
+                val size = when (index) {
+                    0 -> 56.dp
+                    1 -> 52.dp
+                    2 -> 48.dp
+                    else -> 48.dp
+                }
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .size(size)
+                        .background(shape = CircleShape, color = Color.White)
+                        .border(width = 2.dp, shape = CircleShape, color = Color.Black)
+                ) {
+                    Text(
+                        text = bingoItem.number.toString(),
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Black,
+                        color = Color.Black
+                    )
+                }
             }
         }
     }
