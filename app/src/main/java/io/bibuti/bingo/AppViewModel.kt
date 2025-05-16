@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-val GENERATE_AFTER = 3200.milliseconds
+val GENERATE_AFTER = 4800.milliseconds
 
 class AppViewModel(application: Application) : AndroidViewModel(application = application) {
 
