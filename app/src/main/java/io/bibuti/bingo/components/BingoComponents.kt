@@ -87,8 +87,27 @@ fun NumberGridCard(
                                 .weight(1f)
                                 .aspectRatio(1f)
                                 .padding(4.dp)
-                                .background(shape = CircleShape, color = Color.White)
-                                .border(width = 2.dp, shape = CircleShape, color = Color.Black)
+                                .background(
+                                    shape = CircleShape,
+                                    color = Color.White.copy(
+                                        if (numbers[index].isChecked) {
+                                            1f
+                                        } else {
+                                            0.3f
+                                        }
+                                    )
+                                )
+                                .border(
+                                    width = 2.dp,
+                                    shape = CircleShape,
+                                    color = Color.Black.copy(
+                                        if (numbers[index].isChecked) {
+                                            1f
+                                        } else {
+                                            0.3f
+                                        }
+                                    )
+                                )
                         ) {
                             if (numbers[index].isChecked) {
                                 Text(
