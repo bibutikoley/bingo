@@ -17,12 +17,15 @@ import androidx.compose.material.icons.filled.PauseCircle
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.ReplayCircleFilled
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -120,6 +123,16 @@ fun InteractionButtons(
     onResetConfirmed: (() -> Unit)
 ) {
     var resetClickCount by remember { mutableIntStateOf(0) }
+    val playFocusRequester = remember { FocusRequester() }
+    val pauseFocusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(isGameOn) {
+        if (isGameOn) {
+            pauseFocusRequester.requestFocus()
+        } else {
+            playFocusRequester.requestFocus()
+        }
+    }
     Row {
         if (!isGameOn) {
             IconButton(
@@ -127,7 +140,9 @@ fun InteractionButtons(
                     resetClickCount = 0
                     onPlayTapped()
                 },
-                modifier = Modifier.padding(end = 8.dp)
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .focusRequester(playFocusRequester)
             ) {
                 Icon(Icons.Default.PlayCircle, contentDescription = null)
             }
@@ -138,7 +153,9 @@ fun InteractionButtons(
                     resetClickCount = 0
                     onPauseTapped()
                 },
-                modifier = Modifier.padding(horizontal = 4.dp)
+                modifier = Modifier
+                    .padding(horizontal = 4.dp)
+                    .focusRequester(pauseFocusRequester)
             ) {
                 Icon(Icons.Default.PauseCircle, contentDescription = null)
             }

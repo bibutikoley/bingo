@@ -39,7 +39,7 @@ fun HomeScreen() {
             ) {
                 CurrentGeneratedNumber(number = null)
                 InteractionButtons(
-                    isGameOn = true,
+                    isGameOn = false,
                     onPlayTapped = {
                         Log.d(TAG, "HomeScreen: OnPlayTapped")
                     },
