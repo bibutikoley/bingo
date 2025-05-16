@@ -112,7 +112,7 @@ fun NumberGridCard(
                             if (numbers[index].isChecked) {
                                 Text(
                                     text = numbers[index].number.toString(),
-                                    fontSize = 18.sp,
+                                    fontSize = 24.sp,
                                     fontWeight = FontWeight.Black,
                                     color = Color.Black
                                 )
