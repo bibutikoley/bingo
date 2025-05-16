@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 
 val GENERATE_AFTER = 3200.milliseconds
@@ -89,8 +88,11 @@ class AppViewModel(application: Application) : AndroidViewModel(application = ap
                     break
                 }
 
-                val randomIndex = Random.nextInt(availableNumbers.size)
-                val selectedBingoItem = availableNumbers[randomIndex]
+                val selectedBingoItem = availableNumbers
+                    .shuffled()
+                    .shuffled()
+                    .shuffled()
+                    .random()
 
                 var soundPlayed = false
                 var soundPlaybackCompleted = false
