@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.random.Random
-import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Duration.Companion.milliseconds
 
-val GENERATE_AFTER = 3.seconds
+val GENERATE_AFTER = 3200.milliseconds
 
 class AppViewModel(application: Application) : AndroidViewModel(application = application) {
 
