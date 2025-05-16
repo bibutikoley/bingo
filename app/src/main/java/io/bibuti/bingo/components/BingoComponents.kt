@@ -39,7 +39,7 @@ fun GlassmorphicCard(modifier: Modifier = Modifier, content: @Composable ColumnS
             border = Border.None
         ),
         colors = CardDefaults.colors(
-            containerColor = Color.White.copy(alpha = .85f)
+            containerColor = Color.LightGray.copy(alpha = .85f)
         ),
         onClick = {},
         modifier = modifier
