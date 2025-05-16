@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -186,10 +187,6 @@ fun InteractionButtons(
 fun RecentlyGeneratedNumbers(drawnNumbers: List<BingoItem>) {
     val recentThree = drawnNumbers.takeLast(3).reversed()
 
-    if (recentThree.isEmpty()) {
-        return
-    }
-
     GlassmorphicCard(
         modifier = Modifier
             .wrapContentWidth()
@@ -204,20 +201,15 @@ fun RecentlyGeneratedNumbers(drawnNumbers: List<BingoItem>) {
             fontWeight = FontWeight.Black
         )
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(72.dp)
         ) {
             recentThree.forEachIndexed { index, bingoItem ->
-                val size = when (index) {
-                    0 -> 56.dp
-                    1 -> 52.dp
-                    2 -> 48.dp
-                    else -> 48.dp
-                }
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
                         .padding(4.dp)
-                        .size(size)
+                        .size(56.dp)
                         .background(shape = CircleShape, color = Color.White)
                         .border(width = 2.dp, shape = CircleShape, color = Color.Black)
                 ) {

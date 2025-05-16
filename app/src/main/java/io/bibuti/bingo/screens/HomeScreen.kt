@@ -12,10 +12,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.Text
+import io.bibuti.bingo.BingoItem
 import io.bibuti.bingo.BingoViewState
 import io.bibuti.bingo.R
 import io.bibuti.bingo.UserEvents
@@ -60,6 +64,7 @@ fun HomeScreen(
                     }
                 )
                 RecentlyGeneratedNumbers(drawnNumbers = uiState.drawnNumbers)
+                ExtraInfo(uiState.drawnNumbers)
             }
             GlassmorphicCard(
                 modifier = Modifier
@@ -72,6 +77,18 @@ fun HomeScreen(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun ExtraInfo(drawnNumbers: List<BingoItem>) {
+    GlassmorphicCard {
+        Text(
+            "Drawn Numbers: ${drawnNumbers.size}/90",
+            modifier = Modifier.padding(16.dp),
+            color = Color.Black,
+            fontWeight = FontWeight.ExtraBold
+        )
     }
 }
 
