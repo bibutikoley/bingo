@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -77,5 +78,24 @@ fun NumberGridCard(modifier: Modifier = Modifier) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun CurrentGeneratedNumber(modifier: Modifier = Modifier, number: Int) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .padding(16.dp)
+            .background(color = Color.White, shape = CircleShape)
+            .border(width = 4.dp, shape = CircleShape, color = Color.Black)
+            .size(250.dp)
+    ) {
+        Text(
+            text = "$number",
+            fontSize = 80.sp,
+            fontWeight = FontWeight.Black,
+            color = Color.Black
+        )
     }
 }

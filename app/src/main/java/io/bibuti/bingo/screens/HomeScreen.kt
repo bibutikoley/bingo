@@ -2,18 +2,20 @@ package io.bibuti.bingo.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import io.bibuti.bingo.R
+import io.bibuti.bingo.components.CurrentGeneratedNumber
 import io.bibuti.bingo.components.GlassmorphicCard
 import io.bibuti.bingo.components.NumberGridCard
 
@@ -27,7 +29,12 @@ fun HomeScreen() {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            Spacer(modifier = Modifier.weight(1f))
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CurrentGeneratedNumber(number = 90)
+            }
             GlassmorphicCard(
                 modifier = Modifier
                     .size(LocalWindowInfo.current.containerSize.width.div(3).dp)
